@@ -1,0 +1,16 @@
+PODS:
+  - ERPINCodeViewController (0.1.0)
+
+DEPENDENCIES:
+  - ERPINCodeViewController (from `../`)
+
+EXTERNAL SOURCES:
+  ERPINCodeViewController:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  ERPINCodeViewController: 0e4a62623783c7f656f358c488ba62c78477c2c9
+
+PODFILE CHECKSUM: d7a98999dd172a6f2d6fb92d7b58fa54b6d519ea
+
+COCOAPODS: 1.7.1
