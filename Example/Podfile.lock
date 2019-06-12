@@ -1,15 +1,26 @@
 PODS:
-  - ERPINCodeViewController (0.1.0)
+  - CryptoSwift (1.0.0)
+  - ERPINCodeViewController (0.1.0):
+    - CryptoSwift
+    - KeychainAccess
+  - KeychainAccess (3.2.0)
 
 DEPENDENCIES:
   - ERPINCodeViewController (from `../`)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CryptoSwift
+    - KeychainAccess
 
 EXTERNAL SOURCES:
   ERPINCodeViewController:
     :path: "../"
 
 SPEC CHECKSUMS:
-  ERPINCodeViewController: 0e4a62623783c7f656f358c488ba62c78477c2c9
+  CryptoSwift: d81eeaa59dc5a8d03720fe919a6fd07b51f7439f
+  ERPINCodeViewController: 4d4d58080af4ce40acd502b2c99441fb620948bb
+  KeychainAccess: 3b1bf8a77eb4c6ea1ce9404c292e48f948954c6b
 
 PODFILE CHECKSUM: d7a98999dd172a6f2d6fb92d7b58fa54b6d519ea
 

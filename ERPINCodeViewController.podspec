@@ -30,10 +30,12 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.source_files = 'ERPINCodeViewController/Classes/**/*'
-  
-  # s.resource_bundles = {
-  #   'ERPINCodeViewController' => ['ERPINCodeViewController/Assets/*.png']
-  # }
+  s.dependency 'KeychainAccess'
+  s.dependency 'CryptoSwift'
+
+  s.resource_bundles = {
+    'ERPINCodeViewController_Resources' => ['ERPINCodeViewController/Assets/*']
+  }
 
   # s.public_header_files = 'Pod/Classes/**/*.h'
   # s.frameworks = 'UIKit', 'MapKit'

@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="gMr-YV-yay" customClass="PINCodeView" customModule="ERPINCodeViewController">
+            <rect key="frame" x="0.0" y="0.0" width="232" height="18"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="rHH-vN-x95" userLabel="PIN Stack View">
+                    <rect key="frame" x="53" y="0.0" width="126" height="18"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Joy-Rf-fxz" customClass="PINCodeInputView" customModule="ERPINCodeViewController">
+                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="Joy-Rf-fxz" secondAttribute="height" multiplier="1:1" id="o2x-is-KQG"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Sfe-bc-KFH" customClass="PINCodeInputView" customModule="ERPINCodeViewController">
+                            <rect key="frame" x="36" y="0.0" width="18" height="18"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ck5-Uj-oSK" customClass="PINCodeInputView" customModule="ERPINCodeViewController">
+                            <rect key="frame" x="72" y="0.0" width="18" height="18"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rE9-Sd-0vf" customClass="PINCodeInputView" customModule="ERPINCodeViewController">
+                            <rect key="frame" x="108" y="0.0" width="18" height="18"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Ck5-Uj-oSK" firstAttribute="height" secondItem="Joy-Rf-fxz" secondAttribute="height" id="5ks-kb-Eh5"/>
+                        <constraint firstItem="Sfe-bc-KFH" firstAttribute="width" secondItem="Joy-Rf-fxz" secondAttribute="width" id="6q3-jv-5Cc"/>
+                        <constraint firstItem="rE9-Sd-0vf" firstAttribute="height" secondItem="Joy-Rf-fxz" secondAttribute="height" id="Bh4-cF-KaP"/>
+                        <constraint firstItem="Sfe-bc-KFH" firstAttribute="height" secondItem="Joy-Rf-fxz" secondAttribute="height" id="ORG-pw-9cp"/>
+                        <constraint firstItem="Ck5-Uj-oSK" firstAttribute="width" secondItem="Joy-Rf-fxz" secondAttribute="width" id="hGb-Is-Pru"/>
+                        <constraint firstItem="rE9-Sd-0vf" firstAttribute="width" secondItem="Joy-Rf-fxz" secondAttribute="width" id="u2z-Ke-ont"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="rHH-vN-x95" firstAttribute="top" secondItem="gMr-YV-yay" secondAttribute="top" id="MlK-gt-34W"/>
+                <constraint firstItem="rHH-vN-x95" firstAttribute="centerX" secondItem="gMr-YV-yay" secondAttribute="centerX" id="Wbt-Ag-nxA"/>
+                <constraint firstAttribute="bottom" secondItem="rHH-vN-x95" secondAttribute="bottom" id="pc4-D5-aEz"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="KVa-ts-Pg1"/>
+            <connections>
+                <outlet property="stackView" destination="rHH-vN-x95" id="XXC-DT-jaa"/>
+            </connections>
+            <point key="canvasLocation" x="89.855072463768124" y="-107.14285714285714"/>
+        </view>
+    </objects>
+</document>
