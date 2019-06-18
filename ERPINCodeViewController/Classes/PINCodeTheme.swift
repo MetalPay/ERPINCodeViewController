@@ -24,7 +24,7 @@ public struct PINCodeTheme {
     
     public let buttonFont: UIFont
     
-    public init(appName: String, primaryColor: UIColor = .black, nameLabelText: String, nameLabelFont: UIFont = .boldSystemFont(ofSize: UIFont.labelFontSize), titleFont: UIFont = .boldSystemFont(ofSize: UIFont.labelFontSize), captionFont: UIFont = .systemFont(ofSize: UIFont.labelFontSize), buttonFont: UIFont = .systemFont(ofSize: UIFont.buttonFontSize)) {
+    public init(appName: String, primaryColor: UIColor = .black, nameLabelText: String, nameLabelFont: UIFont = .boldSystemFont(ofSize: 18), titleFont: UIFont = .boldSystemFont(ofSize: 18), captionFont: UIFont = .systemFont(ofSize: 14),  buttonFont: UIFont = .systemFont(ofSize: 14)) {
         
         self.appName = appName
         self.primaryColor = primaryColor

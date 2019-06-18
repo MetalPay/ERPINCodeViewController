@@ -45,12 +45,13 @@ public final class PINCodeViewController: UIViewController {
         case create
         case verify
         case change
-        case disable
         
         fileprivate var canCancel: Bool {
             
             switch self {
-            default: return true
+            case .create: return false
+            case .change,
+                 .verify: return true
             }
         }
         
@@ -61,7 +62,6 @@ public final class PINCodeViewController: UIViewController {
             case .create: return [.inputNewPIN, .verifyNewPIN]
             case .verify: return [.inputExistingPIN]
             case .change: return [.inputExistingPIN, .inputNewPIN, .verifyNewPIN]
-            case .disable: return [.inputExistingPIN]
             }
         }
     }
@@ -92,9 +92,7 @@ public final class PINCodeViewController: UIViewController {
         
         switch mode {
         case .create: guard !didSetPINCode else { return }
-        case .change,
-             .verify,
-             .disable: guard didSetPINCode else { return }
+        case .change, .verify: guard didSetPINCode else { return }
         }
         
         DispatchQueue.main.after(delay) {
@@ -106,20 +104,24 @@ public final class PINCodeViewController: UIViewController {
         }
     }
     
-    public static func use(theme: PINCodeTheme, profileImage: UIImage?, keychainService: String?, keychainAccessGroup: String?) {
-        
-        self.theme = theme
-        self.profileImage = profileImage
-        
-        if let service = keychainService, let accessGroup = keychainAccessGroup {
-            
-            self.keychain = Keychain(service: service, accessGroup: accessGroup)
-        }
-    }
-    
     public static func removePINCode() {
         
         try? keychain.remove(keychainPINCodeKey)
+    }
+    
+    public static func use(theme: PINCodeTheme) {
+     
+        self.theme = theme
+    }
+    
+    public static func useKeychain(service: String, accessGroup: String) {
+        
+        self.keychain = Keychain(service: service, accessGroup: accessGroup)
+    }
+    
+    public static func use(profileImage: UIImage) {
+        
+        self.profileImage = profileImage
     }
     
     public static var didSetPINCode: Bool { return savedPINCode != nil }
@@ -200,7 +202,7 @@ public final class PINCodeViewController: UIViewController {
         didSet {
             
             profileImageView.layer.cornerRadius = profileImageView.bounds.midX
-            profileImageView.layer.borderColor = UIColor(white: 0.85, alpha: 1).cgColor
+            profileImageView.layer.borderColor = UIColor(white: 0.45, alpha: 1).cgColor
             profileImageView.layer.borderWidth = 1.5
             profileImageView.layer.masksToBounds = true
         }
@@ -210,13 +212,7 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
             
-            if #available(iOS 11.0, *) {
-                nameLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: PINCodeViewController.theme.nameLabelFont)
-                nameLabel.adjustsFontForContentSizeCategory = true
-            }
-            
-            else { nameLabel.font = PINCodeViewController.theme.nameLabelFont }
-            
+            nameLabel.font = PINCodeViewController.theme.nameLabelFont
             nameLabel.text = PINCodeViewController.theme.nameLabelText
         }
     }
@@ -225,12 +221,7 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
          
-            if #available(iOS 11.0, *) {
-                captionLabel.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: PINCodeViewController.theme.captionFont)
-                captionLabel.adjustsFontForContentSizeCategory = true
-            }
-            
-            else { captionLabel.font = PINCodeViewController.theme.captionFont }
+            captionLabel.font = PINCodeViewController.theme.captionFont
         }
     }
     
@@ -244,13 +235,7 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
             
-            if #available(iOS 11.0, *) {
-                cancelButton.titleLabel?.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: PINCodeViewController.theme.buttonFont)
-                cancelButton.titleLabel?.adjustsFontForContentSizeCategory = true
-            }
-                
-            else { cancelButton.titleLabel?.font = PINCodeViewController.theme.buttonFont }
-            
+            cancelButton.titleLabel?.font = PINCodeViewController.theme.buttonFont
             cancelButton.setTitleColor(PINCodeViewController.theme.primaryColor, for: .normal)
         }
     }
@@ -259,13 +244,7 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
             
-            if #available(iOS 11.0, *) {
-                deleteButton.titleLabel?.font = UIFontMetrics(forTextStyle: .callout).scaledFont(for: PINCodeViewController.theme.buttonFont)
-                deleteButton.titleLabel?.adjustsFontForContentSizeCategory = true
-            }
-                
-            else { deleteButton.titleLabel?.font = PINCodeViewController.theme.buttonFont }
-            
+            deleteButton.titleLabel?.font = PINCodeViewController.theme.buttonFont
             deleteButton.setTitleColor(PINCodeViewController.theme.primaryColor, for: .normal)
         }
     }
@@ -305,16 +284,8 @@ public final class PINCodeViewController: UIViewController {
     }
     
     private func loadProfileImage() {
-    
-        if let image = PINCodeViewController.profileImage {
-            
-            profileImageView.image = image
-            profileImageView.isHidden = false
-        }
         
-        else {
-            profileImageView.isHidden = true
-        }
+        profileImageView.image = PINCodeViewController.profileImage
     }
     
     private func loadCaptionLabel() {
@@ -454,6 +425,8 @@ public final class PINCodeViewController: UIViewController {
         case .verifyNewPIN:
             
             guard currentInput.hashed() == inputMap[.inputNewPIN]?.hashed() else { handlePINCodeFailure(error: .notSameAsNewPIN); return }
+            
+            saveCurrentPINCode()
         }
         
         if currentState == self.mode.states.last { handlePINCodeSuccess() }
@@ -516,13 +489,6 @@ public final class PINCodeViewController: UIViewController {
     private func handlePINCodeSuccess() {
         
         //print(#function)
-        
-        switch self.mode! {
-        case .create,
-             .change: saveCurrentPINCode()
-        case .verify: break
-        case .disable: PINCodeViewController.removePINCode()
-        }
 
         DispatchQueue.main.after(0.5) { [weak self] in
             
