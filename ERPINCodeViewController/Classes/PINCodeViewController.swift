@@ -199,7 +199,6 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
             
-            profileImageView.layer.cornerRadius = profileImageView.bounds.midX
             profileImageView.layer.borderColor = UIColor(white: 0.85, alpha: 1).cgColor
             profileImageView.layer.borderWidth = 1.5
             profileImageView.layer.masksToBounds = true
@@ -358,6 +357,7 @@ public final class PINCodeViewController: UIViewController {
     override public func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        profileImageView.layer.cornerRadius = profileImageView.bounds.midX
     }
     
     //**************************************************//
