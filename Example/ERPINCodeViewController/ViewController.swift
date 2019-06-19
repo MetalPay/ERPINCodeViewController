@@ -14,10 +14,10 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         
         switch sender.tag {
-        case 0: PINCodeViewController.present(for: .create, in: self)
-        case 1: PINCodeViewController.present(for: .verify, in: self)
-        case 2: PINCodeViewController.present(for: .change, in: self)
-        case 3: PINCodeViewController.present(for: .disable, in: self)
+        case 0: PINCodeViewController.present(for: .create, in: self, delegate: self)
+        case 1: PINCodeViewController.present(for: .verify, in: self, delegate: self)
+        case 2: PINCodeViewController.present(for: .change, in: self, delegate: self)
+        case 3: PINCodeViewController.present(for: .disable, in: self, delegate: self)
         default: break
         }
     }
