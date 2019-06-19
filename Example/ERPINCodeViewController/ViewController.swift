@@ -14,10 +14,10 @@ class ViewController: UIViewController {
     @IBAction func buttonPressed(_ sender: UIButton) {
         
         switch sender.tag {
-        case 0: PINCodeViewController.present(for: .create, in: self, delegate: self)
-        case 1: PINCodeViewController.present(for: .verify, in: self, delegate: self)
-        case 2: PINCodeViewController.present(for: .change, in: self, delegate: self)
-        case 3: PINCodeViewController.present(for: .disable, in: self, delegate: self)
+        case 0: PINCodeViewController.show(in: self, for: .create, delegate: self, profileImage: UIImage(named: "profile"))
+        case 1: PINCodeViewController.show(in: self, for: .verify, delegate: self)
+        case 2: PINCodeViewController.show(in: self, for: .change, delegate: self)
+        case 3: PINCodeViewController.show(in: self, for: .disable, delegate: self)
         default: break
         }
     }
@@ -27,8 +27,10 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         PINCodeViewController.use(
-            theme: .init(appName: "Apply", nameLabelText: "John Harrington"),
-            profileImage: UIImage(named: "profile")!,
+            theme: .init(
+                appName: "Apply",
+                nameLabelText: "John Harrington"
+            ),
             keychainService: nil,
             keychainAccessGroup: nil
         )

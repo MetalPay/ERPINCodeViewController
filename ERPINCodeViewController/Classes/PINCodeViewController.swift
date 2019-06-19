@@ -26,7 +26,7 @@ public enum PINCodeValidationError: Error {
     case sameAsExistingPIN
     case notSameAsNewPIN
     
-    var displayCopy: (title: String, caption: String)? {
+    public var displayCopy: (title: String, caption: String)? {
         
         switch self {
             
@@ -86,7 +86,7 @@ public final class PINCodeViewController: UIViewController {
     
     // MARK: Static Variables
     
-    public static func present(for mode: Mode, in viewController: UIViewController, delegate: PINCodeViewControllerDelegate, after delay: TimeInterval? = nil) {
+    public static func show(in viewController: UIViewController, for mode: Mode, delegate: PINCodeViewControllerDelegate, profileImage: UIImage? = nil, after delay: TimeInterval? = nil) {
         
         //if mode == .create && didSetPINCode { return }
         
@@ -102,14 +102,14 @@ public final class PINCodeViewController: UIViewController {
             let instance: PINCodeViewController = UIStoryboard(name: "PINCode", bundle: .resources).instantiateInitialViewController() as! PINCodeViewController
             instance.mode = mode
             instance.delegate = delegate
+            instance.profileImage = profileImage
             viewController.present(instance, animated: true, completion: nil)
         }
     }
     
-    public static func use(theme: PINCodeTheme, profileImage: UIImage?, keychainService: String?, keychainAccessGroup: String?) {
+    public static func use(theme: PINCodeTheme, keychainService: String?, keychainAccessGroup: String?) {
         
         self.theme = theme
-        self.profileImage = profileImage
         
         if let service = keychainService, let accessGroup = keychainAccessGroup {
             
@@ -127,8 +127,6 @@ public final class PINCodeViewController: UIViewController {
     static var theme = PINCodeTheme(appName: "Default App Name", nameLabelText: "Default User")
     
     private static var keychain = Keychain()
-    
-    private static var profileImage: UIImage?
 
     private static let keychainPINCodeKey = "PINCodeViewController-PINCode"
     
@@ -141,6 +139,8 @@ public final class PINCodeViewController: UIViewController {
     
     private weak var delegate: PINCodeViewControllerDelegate?
     
+    private var profileImage: UIImage?
+
     private var mode: Mode! {
         
         didSet {
@@ -306,7 +306,7 @@ public final class PINCodeViewController: UIViewController {
     
     private func loadProfileImage() {
     
-        if let image = PINCodeViewController.profileImage {
+        if let image = self.profileImage {
             
             profileImageView.image = image
             profileImageView.isHidden = false
