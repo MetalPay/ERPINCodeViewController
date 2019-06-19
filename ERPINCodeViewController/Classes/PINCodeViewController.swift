@@ -161,7 +161,7 @@ public final class PINCodeViewController: UIViewController {
         
         didSet {
             
-            print("Input map set: \(inputMap)")
+            //print("Input map set: \(inputMap)")
 
             currentPINCodeView.update(for: currentInput)
             updateDeleteButtonEnabled()
@@ -573,7 +573,7 @@ public final class PINCodeViewController: UIViewController {
         
         catch {
             
-            print(error)
+            print("An error occurred saving the current PIN code error: \(error)")
         }
     }
     
