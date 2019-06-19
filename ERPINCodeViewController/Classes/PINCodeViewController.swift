@@ -86,7 +86,7 @@ public final class PINCodeViewController: UIViewController {
     
     // MARK: Static Variables
     
-    public static func present(for mode: Mode, in viewController: (UIViewController & PINCodeViewControllerDelegate), after delay: TimeInterval? = nil) {
+    public static func present(for mode: Mode, in viewController: UIViewController, delegate: PINCodeViewControllerDelegate, after delay: TimeInterval? = nil) {
         
         //if mode == .create && didSetPINCode { return }
         
@@ -101,7 +101,7 @@ public final class PINCodeViewController: UIViewController {
          
             let instance: PINCodeViewController = UIStoryboard(name: "PINCode", bundle: .resources).instantiateInitialViewController() as! PINCodeViewController
             instance.mode = mode
-            instance.delegate = viewController
+            instance.delegate = delegate
             viewController.present(instance, animated: true, completion: nil)
         }
     }
